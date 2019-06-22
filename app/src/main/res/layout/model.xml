@@ -13,30 +13,31 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="10"
-    android:background="@color/blue1"
+    android:background="#666666"
     >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="10"
+        android:gravity="center"
         >
 
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:text="Name :"
             android:id="@+id/std_full_name"
 
-            android:textColor="@color/colorAccent"
+            android:textColor="#2196F3"
             android:textStyle="bold|italic"
             android:layout_alignParentLeft="true"
             />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Roll : "
@@ -44,7 +45,7 @@
             android:id="@+id/std_roll" />
 
  <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Registration : "
