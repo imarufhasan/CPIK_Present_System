@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CPIK_Present_System</string>
+    <string name="app_name">City App</string>
     <string name="prompt_email">Email</string>
     <string name="password">Password(Optional)</string>
     <string name="sign_in">Sign In</string>

@@ -1,14 +1,19 @@
 package com.bayazid.cpik_present_system;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.icu.text.CaseMap;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -33,44 +38,33 @@ public class GetStudentDocuments extends AppCompatActivity {
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     public static final String TAG = "GetStudentDocuments";
     private ListView listView_Std;
-    private StdDoc_CustomAdapter stdDoc_customAdapter;
-    private Std_Data_set std_data_set;
     private Custom_Array cAdapter;
    private ArrayList<Std_Data_set> std_data_sets = new ArrayList<>();
+   private Button Confirm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_student_documents);
-        listView_Std=findViewById(R.id.std_listView);
-
-
-
-
-
-
-
-
-
         Bundle bundle = getIntent().getExtras();
-
-
-
-
+        listView_Std=findViewById(R.id.std_listView);
+        Confirm=findViewById(R.id.confirm_btn);
+        Confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                makeAlartDialog();
+            }
+        });
 
 
 
 
         if(bundle.getString("department")!= null && bundle.get("semester")!=null)
-        {
-            //set bollen true
+        { //set bollen true
             pathDirr=true;
-
-            //TODO here get the string stored in the string variable and do
-            // setText() on userName
             Department=bundle.getString("department");
             Semester=bundle.getString("semester");
             //change title
-            setTitle(Department+" > " + Semester +" > Students List");
+            setTitle(Department+" > " + Semester +" > Students");
             //Toast.makeText(getApplicationContext(),Department+" > "+Semester,Toast.LENGTH_SHORT).show();
 
         }
@@ -81,6 +75,37 @@ public class GetStudentDocuments extends AppCompatActivity {
             //get All Documents Data by ID/Roll
             getAllStudentsInfo();
         }
+    }
+
+    private void makeAlartDialog() {
+        //dialog builder
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(GetStudentDocuments.this);
+        builder1.setMessage("Submit 22 Students Attendances  following this Context");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Submit",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        startActivity(new Intent(GetStudentDocuments.this,Teacher_Class_type.class));
+                        GetStudentDocuments.this.finish();
+                        Toast.makeText(getApplicationContext(),"Students Attendance Data Submitted Successfully ",Toast.LENGTH_LONG).show();
+
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "Deny",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
     private void getAllStudentsInfo() {
@@ -95,16 +120,7 @@ public class GetStudentDocuments extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-//                                Log.d(TAG, document.getId() + " => " + document.getData());
-//                                Toast.makeText(getApplicationContext()," Students Details >> "+document.getData(),Toast.LENGTH_LONG).show();
-//                                std_data_set.setFirst_Name(document.getString("first_name"));
-//                                std_data_set.setLast_Name(document.getString("last_name"));
-//                                std_data_set.setCollege_Roll(document.getString("college_rool"));
-//                                std_data_set.setReg_Number(document.getString("registration"));
-//                                ArrayList<Std_Data_set> std_data_sets = new ArrayList<>();
-//                                std_data_sets.add(new Std_Data_set("Musanna", "2013","23213"));
-//                                cAdapter = new Custom_Array(getApplicationContext(),std_data_sets);
-//                                listView_Std.setAdapter(cAdapter);
+
                                 std_data_sets.add(new Std_Data_set(  document.getString("first_name"),document.getString("last_name"), document.getString("college_rool"), document.getString("registration")));
                                 cAdapter = new Custom_Array(getApplicationContext(),std_data_sets);
                                 listView_Std.setAdapter(cAdapter);
@@ -119,9 +135,7 @@ public class GetStudentDocuments extends AppCompatActivity {
 
                             }
 
-//                            ArrayList<Std_Data_set> Std_Data_set  =new ArrayList<Std_Data_set>();
-//                            stdDoc_customAdapter=new StdDoc_CustomAdapter(GetStudentDocuments.this,Std_Data_set);
-//                            listView_Std.setAdapter(stdDoc_customAdapter);
+
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                             Toast.makeText(getApplicationContext(),"Getting Error "+ task.getException(),Toast.LENGTH_SHORT).show();
