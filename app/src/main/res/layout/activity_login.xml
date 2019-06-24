@@ -23,12 +23,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_close_black_24dp"
-                />
-
 
 
 
