@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,9 @@ private TextView Registration;
     public static final String TAG = "Login Activity ";
     private EditText Email,Password;
     private String passEmail,passPassword;
+    private ImageView logo;
+    private LinearLayout linearLayout;
+    private Animation downToUp, upToDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

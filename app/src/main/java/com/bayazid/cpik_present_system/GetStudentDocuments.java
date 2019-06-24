@@ -144,21 +144,3 @@ public class GetStudentDocuments extends AppCompatActivity {
                 });
     }
 }
-
-    //for a Single Document
-    //            DocumentReference docRef = db.collection("students_collection").document(Department).collection(Semester).document();
-    //            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-    //                @Override
-    //                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-    //                    if (task.isSuccessful()) {
-    //                        DocumentSnapshot document = task.getResult();
-    //                        if (document.exists()) {
-    //                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-    //                        } else {
-    //                            Log.d(TAG, "No such document");
-    //                        }
-    //                    } else {
-    //                        Log.d(TAG, "get failed with ", task.getException());
-    //                    }
-    //                }
-    //            });
