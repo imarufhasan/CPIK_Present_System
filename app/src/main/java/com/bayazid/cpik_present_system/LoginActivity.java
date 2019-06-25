@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +38,9 @@ private TextView Registration;
         setContentView(R.layout.activity_login);
 // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        //set up animation
+        upToDown = AnimationUtils.loadAnimation(this, R.anim.uptodown);
+        downToUp = AnimationUtils.loadAnimation(this, R.anim.downtoup);
 
         LogInBtn =findViewById(R.id.email_sign_in_button);
         Registration=findViewById(R.id.link_register);
